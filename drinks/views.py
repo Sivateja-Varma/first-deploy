@@ -15,7 +15,8 @@ def drink_list(request,format=None):
     serializer=DrinkSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
-      return Response(serializer.data,status=status.HTTP_201_CREATED)  
+      return Response(serializer.data,status=status.HTTP_201_CREATED) 
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','DELETE','PUT'])    
 def drink_detail(request,id,format=None):
